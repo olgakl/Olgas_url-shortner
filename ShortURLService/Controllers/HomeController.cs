@@ -97,18 +97,21 @@ namespace ShortURLService.Controllers
                     if (shortUrl.CheckLongUrlExists())  // goes to the site to check its valid
                     {
                         // Main work happens here
-                        int numbOfRows = db.Urls.Count();
-                        string result = URL.Encode(numbOfRows + 1);
+                        var prevItem = db.Urls.OrderByDescending(s => s.UrlId).FirstOrDefault();
+                        int nextItemId = prevItem != null ? prevItem.UrlId + 1 : 1;
+                        string result = URL.Encode(nextItemId);   
                         shortUrl.AssignShortUrl(result);
 
+                        //assigning userId
                         if (!string.IsNullOrEmpty(userId))
                             shortUrl.UserId = userId;
-
-                        //adding it to the database
-                        db.Urls.Add(shortUrl);
+                        
                         try
                         {
+                            //adding it to the database
+                            db.Urls.Add(shortUrl);
                             db.SaveChanges();
+
                             shortUrl.ShortUrl = Request.Url.Scheme + "://" + Request.Url.Authority + "/" + shortUrl.ShortUrl;
 
                             return Json(new { status = true, url = shortUrl }, JsonRequestBehavior.AllowGet);

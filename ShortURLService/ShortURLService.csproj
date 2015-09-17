@@ -237,6 +237,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\okl.pubxml" />
+    <None Include="Properties\PublishProfiles\OlgasUrlShortener %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\OlgasUrlShortener.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />

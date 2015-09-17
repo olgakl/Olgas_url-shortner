@@ -19,9 +19,6 @@ namespace ShortURLService.Migrations
                     })
                 .PrimaryKey(t => t.UrlId);
 
-            //CreateIndex("dbo.URLs", new string[] { "LongUrl", "ShortUrl" },
-            //    true, "IX_URLs_LongUrl");
-
             CreateTable(
                 "dbo.Users",
                 c => new
@@ -40,7 +37,6 @@ namespace ShortURLService.Migrations
         {
             DropTable("dbo.Users");
             DropTable("dbo.URLs");
-            //DropIndex("dbo.URLs", "IX_URLs_LongUrl");
         }
     }
 }
