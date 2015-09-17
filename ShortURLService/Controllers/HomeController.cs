@@ -15,10 +15,11 @@ namespace ShortURLService.Controllers
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
         (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        UrlContext db = new UrlContext();
+        UrlContext db = new UrlContext();        
         public ActionResult Index()
         {
             IEnumerable<URL> model = new List<URL>();
+            db.Configuration.ProxyCreationEnabled = false;
             if (User.Identity.IsAuthenticated)
             {
                 string userId = User.Identity.GetUserId();
@@ -73,6 +74,8 @@ namespace ShortURLService.Controllers
         [HttpPost]
         public ActionResult ShorterURL(string longUrl)
         {
+            db.Configuration.ProxyCreationEnabled = false;
+
             if (string.IsNullOrEmpty(longUrl))
                 return Json(new { status = false, message = "Please provide URL" }, JsonRequestBehavior.AllowGet);
             else
@@ -137,6 +140,8 @@ namespace ShortURLService.Controllers
         [HttpPost]
         public ActionResult LongerURL(string shortUrl)
         {
+            db.Configuration.ProxyCreationEnabled = false;
+
             if (string.IsNullOrEmpty(shortUrl))
                 return Json(new { status = false, message = "Please provide URL" }, JsonRequestBehavior.AllowGet);
             else
